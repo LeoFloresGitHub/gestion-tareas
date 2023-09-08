@@ -1,0 +1,407 @@
+
+.contenedor {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.cabecera {
+    height: 30%;
+    width: 150dp;
+    display: flex;
+}
+
+.bienvenida {
+    flex: 1; /* Cada div ocupará el 50% del ancho disponible */
+    text-align: center;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: left; /* Centra horizontalmente el contenido */
+    padding-left: 20px;
+    font-size: 45px;
+}
+
+.fecha-contenedor {
+    flex: 1; /* Cada div ocupará el 50% del ancho disponible */
+
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.fecha {
+    padding: 30px;
+    border-radius: 25px;
+    border-style: solid;
+    font-size: 45px;
+}
+
+.cuerpo {
+    height: 70%;
+    width: 150dp;
+    display: flex;
+}
+
+.mensaje {
+    flex: 0.4; /* Cada div ocupará el 50% del ancho disponible */
+    text-align: center;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: left; /* Centra horizontalmente el contenido */
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 45px;
+}
+
+.boton-contenedor {
+    flex: 0.6; /* Cada div ocupará el 50% del ancho disponible */
+
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.boton1-contenedor {
+    flex: 0.5; /* Cada div ocupará el 50% del ancho disponible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.boton2-contenedor {
+    flex: 0.5; /* Cada div ocupará el 50% del ancho disponible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+
+
+
+
+.boton1 {
+    padding: 30px;
+    height: 150px;
+    width: 150px;
+    background-image: url(https://progweb2fml.000webhostapp.com/hotel/fotos/hotelcusco.jpg);
+    border-radius: 100px;
+    border-style: solid;
+    font-size: 45px;
+}
+
+.boton2 {
+    padding: 30px;
+    height: 150px;
+    width: 150px;
+    background-image: url(https://progweb2fml.000webhostapp.com/hotel/fotos/hotelcusco.jpg);
+    border-radius: 100px;
+    border-style: solid;
+    font-size: 45px;
+}
+
+
+.botonSuperpuesto {
+    position: fixed;
+    bottom: 65px;
+    right: 50px;
+    padding: 10px 20px;
+    border: none;
+    width: 165px;
+    height: 62px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    border-radius: 1rem;
+    background: #100720;
+    transition: 0.1s;
+    z-index: 2; /* Ajustamos el z-index para que el botón esté por encima del ::after */
+}
+
+
+
+
+    .botonSuperpuesto:hover {
+        transform: scale(0.9) rotate(1deg);
+        background: radial-gradient( circle farthest-corner at 10% 20%, #ff0000 17.8%, black 100.2% );
+        transition: 0.5s;
+        z-index: 2; /* Ajustamos el z-index durante la acción activa para que el botón esté por encima del ::after */
+    }
+
+.card {
+    margin: 50px;
+    position: relative;
+    width: 200px;
+    height: 190px;
+    border-radius: 14px;
+    z-index: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    cursor: pointer;
+}
+
+.bg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 190px;
+    height: 180px;
+    z-index: 2;
+    background: rgba(255, 255, 255, .95);
+    backdrop-filter: blur(24px);
+    border-radius: 10px;
+    overflow: hidden;
+    outline: 2px solid white;
+    text-align: center;
+}
+
+.blob {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    opacity: 1;
+    filter: blur(12px);
+    animation: blob-bounce 5s infinite ease;
+}
+
+@keyframes blob-bounce {
+    0% {
+        transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    }
+
+    25% {
+        transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+    }
+
+    50% {
+        transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+    }
+
+    75% {
+        transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+    }
+
+    100% {
+        transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    }
+}
+
+
+
+.contenedorCards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.tit {
+    display:flex;
+    flex-direction:column;
+    background-color: azure;
+    overflow: auto;
+    height: 80vh;
+    align-items:center;
+}
+
+
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.title {
+    font-size: 28px;
+    color: #ff0000;
+    ;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    margin-bottom: 5px;
+}
+
+    .title::before, .title::after {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        left: 0px;
+        background-color: #ff0000;
+        ;
+    }
+
+    .title::before {
+        width: 18px;
+        height: 18px;
+        background-color: #ff0000;
+        ;
+    }
+
+    .title::after {
+        width: 18px;
+        height: 18px;
+        animation: pulse 1s linear infinite;
+    }
+
+.message {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+}
+
+
+
+
+.flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+}
+
+.form label {
+    position: relative;
+    width:100%;
+    margin-bottom: 10px;
+}
+
+    .form label .input {
+        width: 100%;
+        padding: 10px 10px 20px 10px;
+        outline: 0;
+        border: 1px solid rgba(105, 105, 105, 0.397);
+        border-radius: 10px;
+    }
+
+        .form label .input + span {
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            color: grey;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+
+        .form label .input:placeholder-shown + span {
+            top: 15px;
+            font-size: 0.9em;
+        }
+
+        .form label .input:focus + span, .form label .input:valid + span {
+            top: 30px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .form label .input:valid + span {
+            color: green;
+        }
+
+.submit {
+    border: none;
+    outline: none;
+    background-color: #ff0000;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    cursor: pointer;
+}
+
+    .submit:hover {
+        background-color: rgb(235, 0, 0);
+    }
+
+.a {
+    border: none;
+    outline: none;
+    max-width: 350px;
+    margin-left: 20px;
+    align-items: center;
+    width: 50%;
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    cursor: pointer;
+}
+
+    .a:hover {
+        background-color: #141212;
+        cursor: pointer;
+    }
+
+.der {
+    text-align: right;
+}
+
+.eliminar {
+    text-align: right;
+    margin-top: 2px;
+    margin-right: 13px;
+    margin-bottom: 8px;
+    z-index:3;
+    padding:2px;
+}
+
+
+
+@keyframes pulse {
+    from {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+
+

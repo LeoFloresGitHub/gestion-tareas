@@ -1,0 +1,329 @@
+﻿
+@model ListAndNListTarea
+
+@{
+   ViewData["Title"] = "Home Page";
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tareas</title>
+    <link rel="stylesheet" href="~/css/gestionTareas.css" />
+</head>
+<body>
+
+    
+        <div id="miModalEditar" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 999;">
+        <div class="form" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px;">
+            <!-- Contenido del modal -->
+        <form  asp-action="ActualizarTarea" asp-controller="Tarea">
+        <p class="title">Actualizar Tarea </p>
+        <label>
+            <input required="" type="date" id="Fven" name="Fven"  class="input">
+            <span>Vencimiento</span>
+        </label> 
+        <input type="hidden" id="IdTarea" name="IdTarea" />
+        <input type="hidden" id="IdCategoria" name="IdCategoria" />
+        <label>
+            <input required="" type="text" id="Titulo" name="Titulo" class="input">
+            <span>Titulo</span>
+        </label> 
+        <label>
+            <input required="" type="text" id="Descripcion" name="Descripcion" class="input">
+            <span>Descripción</span>
+        </label> 
+        <label>
+            <select required="" id="Prioridad" name="Prioridad"  type="number" class="input">
+                <option value="1">Alta</option>
+                <option value="2">Media</option>
+                <option value="3">Baja</option>
+            </select>   
+            <span>Prioridad</span>
+        </label>
+        <label>
+            <select required="" id="Estado" name="Estado" type="number" class="input">
+                <option value="1" >Incompleta</option>
+                <option value="2">En Progreso</option>
+                <option value="3">Completada</option>
+                <option value="4">Pendiente</option>
+            </select>   
+            <span>Estado</span>
+        </label> 
+        <div class="der">
+        <button  type="submit"  class="submit"> Agregar</button>
+        <a id="btnCerrarModal" class="a">Cancelar</a>
+        </div>
+        </form>
+            
+        </div>
+        </div>
+
+
+
+        <div id="miModalNuevo" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 999;">
+        <div class="form" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px;">
+            <!-- Contenido del modal -->
+            <form asp-action="GrabarTarea" asp-controller="Tarea">
+            <p class="title">Nueva Tarea </p>
+            
+            <label>
+            <input required="" type="date" id="Fven2" name="Fven"  class="input" placeholder=" ">
+            <span>Vencimiento</span>
+            </label> 
+            <input type="hidden" id="IdCategoria2" name="IdCategoria" />
+            <label>
+            <input required="" type="text" id="Titulo" name="Titulo" class="input">
+            <span>Titulo</span>
+            </label> 
+            <label>
+            <input required="" type="text" id="Descripcion" name="Descripcion" class="input">
+            <span>Descripción</span>
+            </label> 
+            <label>
+            <select required="" id="Descripcion" name="Prioridad"  type="number" class="input">
+                <option value="1">Alta</option>
+                <option value="2">Media</option>
+                <option value="3">Baja</option>
+            </select>   
+            <span>Prioridad</span>
+            </label>
+            <label>
+            <select required="" id="Descripcion" name="Estado" type="number" class="input">
+                <option value="1" >Incompleta</option>
+                <option value="2">En Progreso</option>
+                <option value="3">Completada</option>
+                <option value="4">Pendiente</option>
+                <option value="4">Vencido</option>
+            </select>   
+            <span>Estado</span>
+            </label> 
+            
+            <div class="der">
+        <button   type="submit"  class="submit"> Agregar</button>
+        <a id="btnCerrarModal2" class="a">Cancelar</a>
+        </div>
+            </form>
+           
+        </div>
+        </div>
+
+
+
+  <div class="limiter">
+    <div class="title2">
+    <h1>Tareas</h1>
+    </div>
+    <div class="container-table100">
+    
+    <button  type="button" id="btnAbrirModal2" class= "btn " data-idC="@ViewData["idCategoria"]">
+            Nueva Tarea
+    </button>
+    <br>
+    <div class="wrap-table100">
+    <div class="table100">
+    <table>
+    <thead>
+    <tr class="table100-head">
+    <th class="column1">Date</th>
+    <th class="column2">Titulo</th>
+    <th class="column3">Descripción</th>
+    <th class="column5">Prioridad</th>
+    <th class="column5">Estado</th>
+    <th class="column6">Acciones</th>
+    
+    </tr>
+    </thead>
+   
+    <tbody>
+
+        @for(int i=0; i < Model.ListaTareas.Count(); i++)
+        {
+        <tr>
+        <td class="column1">@Model.ListaTareas[i].Fven.ToString("dd/MM/yyyy")</td>
+        <td class="column2">@Model.ListaTareas[i].Titulo</td>
+        <td class="column3">@Model.ListaTareas[i].Descripcion</td>
+        <td  class="column5">
+            @switch(Model.ListaTareas[i].Prioridad)
+            {
+                case 1:
+                    <text>Alta</text>
+                    break;
+                case 2:
+                    <text>Media</text>
+                    break;
+                default:
+                    <text>Baja</text>
+                    break;
+            }
+        </td>
+
+        <td  class="colum5">
+            @switch(Model.ListaTareas[i].Estado)
+            {
+                case 1:
+                    <text>Incompleta</text>
+                    break;
+                case 2:
+                    <text>En Progreso</text>
+                    break;
+                case 3:
+                    <text>Completada</text>
+                    break;
+                case 4:
+                    <text>Pendiente</text>
+                    break;
+                default:
+                    <text>Vencido</text>
+                    break;
+            }
+        </td>
+        <td   class="column6">
+            <button type="button" class="btnAbrirModal" data-prioridad="@Model.ListaTareas[i].Prioridad" data-estado="@Model.ListaTareas[i].Estado" data-idC="@Model.ListaTareas[i].IdCategoria" data-idT="@Model.ListaTareas[i].IdTarea">Editar</button>
+            <a class="btnE" href="@Url.Action("EliminarTarea", "Tarea", new { idTarea = Model.ListaTareas[i].IdTarea, idCategoria = ViewData["idCategoria"] })">Eliminar</a>
+        </td>
+
+        </tr>
+        
+         }
+    
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+    <!-- Aquí va el script para manejar el modal Editar -->
+    <script>
+    // Obtener referencia a los botones "Editar" y al modal
+    const btnAbrirModal = document.getElementsByClassName('btnAbrirModal');
+    const miModal = document.getElementById('miModalEditar');
+    const btnCerrarModal = document.getElementById('btnCerrarModal');
+
+    
+    const vfven = document.getElementById('Fven');
+    const vtitu = document.getElementById('Titulo');
+    const vdesc = document.getElementById('Descripcion');
+    const vprio = document.getElementById('Prioridad');
+    const vesta = document.getElementById('Estado');
+    const vidc = document.getElementById('IdCategoria');
+    const vidt = document.getElementById('IdTarea');
+
+    // Función para mostrar el modal con los datos de la tarea seleccionada
+    function mostrarModal(e) {
+       const filaIndex = e.target.closest('tr').rowIndex ;
+        // Obtener los datos de la tarea desde las celdas de la fila seleccionada
+        const fechaTexto = document.getElementsByClassName('column1')[filaIndex].innerText;
+         console.log(fechaTexto);
+        
+        const partesFecha = fechaTexto.split('/');
+        const dia = partesFecha[0];
+        const mes = partesFecha[1];
+        const anio = partesFecha[2];
+        
+        const fechaFormateada2 = `${anio}-${mes}-${dia}`;
+        console.log(fechaFormateada2);
+        vfven.value = fechaFormateada2;
+        vtitu.value = document.getElementsByClassName('column2')[filaIndex].innerText;
+        vdesc.value = document.getElementsByClassName('column3')[filaIndex].innerText;
+        vidc.value = e.target.getAttribute('data-idC');
+        vidt.value = e.target.getAttribute('data-idT');
+        vprio.value = e.target.getAttribute('data-prioridad');
+        vesta.value = e.target.getAttribute('data-estado');
+
+        miModal.style.display = 'block';
+    }
+
+     // Función para cerrar el modal
+    function cerrarModal() {
+        miModal.style.display = 'none';
+    }
+    // Asignar evento de clic a los botones "Editar" con la clase "btnAbrirModal"
+    // Asignar evento de clic a los botones "Editar" con la clase "btnAbrirModal"
+    for (let i = 0; i < btnAbrirModal.length; i++) {
+        btnAbrirModal[i].addEventListener('click', mostrarModal);
+    }
+
+    // Asignar evento de clic al botón "Cerrar Modal"
+    btnCerrarModal.addEventListener('click', cerrarModal);
+    </script>
+
+    <!-- Aquí va el script para manejar el modal Nuevo-->
+    <script>
+
+    // Obtener referencia a los botones "Nuevo" y al modal
+    const btnAbrirModal2 = document.getElementById('btnAbrirModal2');
+    const miModal2 = document.getElementById('miModalNuevo');
+    const btnCerrarModal2 = document.getElementById('btnCerrarModal2');
+
+    
+   
+    
+
+    // Función para mostrar el modal con los datos de la tarea seleccionada
+    function mostrarModal2() {
+        const vidc = document.getElementById('IdCategoria2');
+        const vdate = document.getElementById('Fven2');
+
+        // Obtener la fecha de hoy
+        const fechaHoy = new Date();
+
+        // Obtener los componentes de fecha (año, mes y día)
+        const anio = fechaHoy.getFullYear();
+        const mes = fechaHoy.getMonth() + 1; // Los meses en JavaScript están basados en cero (enero es 0)
+        const dia = fechaHoy.getDate();
+
+        // Formatear la fecha como "dd/mm/yyyy" (agregando ceros a la izquierda si es necesario)
+        const fechaFormateadaHoy = `${anio.toString().padStart(2, '0')}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+        console.log(fechaFormateadaHoy); // Salida: "dd/mm/yyyy" con la fecha actual
+
+        vidc.value = this.getAttribute('data-idC');
+        vdate.value = fechaFormateadaHoy;
+        miModal2.style.display = 'block';
+    }
+
+     // Función para cerrar el modal2
+    function cerrarModal2() {
+        miModal2.style.display = 'none';
+    }
+    
+    // Asignar evento de clic a los botones "Editar" con la clase "btnAbrirModal"
+
+    btnAbrirModal2.addEventListener('click', mostrarModal2);
+    
+
+    // Asignar evento de clic al botón "Cerrar Modal"
+    btnCerrarModal2.addEventListener('click', cerrarModal2);
+    </script>
+
+    <script>
+    // Obtenemos todos los elementos con la clase "eliminarCat"
+    var btnEliminar = document.querySelectorAll('.btnE');
+
+    // Agregamos el evento clic a cada enlace
+    btnEliminar.forEach(function(btnEliminar) {
+    btnEliminar.addEventListener('click', function(event) {
+        
+        // Preguntar al usuario si está seguro de eliminar la categoría
+        if (confirm("¿Estás seguro que deseas eliminar la tarea?")) {
+
+            }
+            else{
+                event.preventDefault();
+            }
+     });
+    });
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

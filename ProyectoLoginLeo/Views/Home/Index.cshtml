@@ -1,0 +1,126 @@
+﻿@model ProyectoLoginLeo.Models.ListAndNListCategorium
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="tit">
+    <div>
+        <h1> Bienvenido @ViewData["nombreUsuario"]</h1>
+    </div>
+    
+
+
+ <div class="contenedorCards">
+
+@for (int i = 0; i<Model.ListaCategorias.Count(); i++)
+{
+    <card  id="card-@i" class="card">
+        <form asp-action="GestionarTareas" asp-controller="Tarea" method="get">
+        <div class="blob"></div>
+        <div class="bg">
+            <input type="hidden" id="idCategoria" name="idCategoria" value="@Model.ListaCategorias[i].IdCategoria"/>
+            <div class="eliminar">
+            <a class="eliminarCat" href="@Url.Action("EliminarCategoria", "Categoria", new { idCategoria = @Model.ListaCategorias[i].IdCategoria })"> X </a>
+            </div>
+            <h2>@Model.ListaCategorias[i].Nombre</h2>
+            <p>Números de tareas</p>
+            <h1>@Model.ListaCategorias[i].Tareas.Count()</h1>  
+        </div>
+        </form>
+    </card>
+    
+}
+
+    <button type="button" class="botonSuperpuesto" id="btnAbrirModal" >Nueva Categoria</button>
+
+
+    <!-- Modal -->
+    <div id="miModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 999;">
+        <div class="form" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px;">
+            <!-- Contenido del modal -->
+           <form  asp-action="SubirCategorias" asp-controller="Categoria">
+        <p class="title">Nueva Categoria </p>
+        
+        <label>
+            <input required="" asp-for="NuevoCategorium.Nombre" placeholder="" type="text" class="input">
+            <span>Nombre</span>
+        </label> 
+            
+        <div class="der">
+        <button  type="submit"  class="submit">Agregar</button>
+        <a id="btnCerrarModal" class="a">Cancelar</a>
+        </div>
+        </form>
+        
+        </div>
+    </div>
+
+</div>   
+
+</div>
+    <!-- Aquí va el script para manejar el modal -->
+    <script>
+        // Obtener referencia al botón y al modal
+        const btnAbrirModal = document.getElementById('btnAbrirModal');
+        const miModal = document.getElementById('miModal');
+        const btnCerrarModal = document.getElementById('btnCerrarModal');
+
+        // Función para mostrar el modal
+        function mostrarModal() {
+            miModal.style.display = 'block';
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            miModal.style.display = 'none';
+            
+        }
+
+        // Asignar evento de clic al botón "Abrir Modal"
+        btnAbrirModal.addEventListener('click', mostrarModal);
+
+        // Asignar evento de clic al botón "Cerrar Modal"
+        btnCerrarModal.addEventListener('click', cerrarModal);
+
+
+
+
+    </script>
+
+    <script>
+    // Obtiene todos los elementos card
+    var cards = document.querySelectorAll('card');
+
+    // Agrega un evento clic a cada card
+    cards.forEach(function(card, index) {
+        card.addEventListener('click', function() {
+            // Obtiene el formulario dentro del card actual
+            var form = card.querySelector('form');
+            // Envía el formulario
+            form.submit();
+        });
+    });
+    </script>
+
+    <script>
+    // Obtenemos todos los elementos con la clase "eliminarCat"
+    var btnEliminarList = document.querySelectorAll('.eliminarCat');
+
+    // Agregamos el evento clic a cada enlace
+    btnEliminarList.forEach(function(btnEliminar) {
+    btnEliminar.addEventListener('click', function(event) {
+        // Detenemos la propagación del evento para evitar que se active el evento del card
+        event.stopPropagation();
+
+        // Preguntar al usuario si está seguro de eliminar la categoría
+        if (confirm("¿Estás seguro que deseas eliminar la categoría?")) {
+
+            }
+            else{
+                event.preventDefault();
+            }
+     });
+    });
+    </script>
+

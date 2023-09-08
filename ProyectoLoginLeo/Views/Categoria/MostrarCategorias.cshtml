@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+    <div class="contenedor">
+        <div class="cabecera">
+            <div class="bienvenida">
+                ¡Bienvenidosijisjjsij @ViewData["nombreUsuario"] con id @ViewData["idUsuario"]!
+            </div>
+            <div class="fecha-contenedor">
+                <div class="fecha">
+                    @ViewData["fechaHoy"]  
+                </div>
+                
+            </div>
+        </div>
+        <div class="cuerpo">
+            <div class="mensaje">
+                Esta página sirve para registrar tus ingresos y salida.
+                </br></br></br>
+                ¿Que haremos hoy?
+            </div>
+            
+            <div class="boton-contenedor">
+                <form asp-controller="Tarea" asp-action="GestionarTareas" method="get">
+                <div class="boton1-contenedor">
+                    <button type="submit" class="boton1" >   
+                    </button>
+                    <input type="hidden" name="Categoria" value="1" />
+                    <p >Cat1IJSOIJSIJ</p>
+                </div>
+                </form>
+                <form asp-controller="Registro" asp-action="UsuarioRegistros">
+                <div class="boton2-contenedor">
+                    <button type="submit" class="boton2" >
+
+                    </button>
+                    <input type="hidden" name="Categoria" value="1" />
+                    <p>CAt2</p>
+                </div>
+                </form>
+                
+            </div>
+            
+
+        </div>
+    </div>
+
